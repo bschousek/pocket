@@ -1,0 +1,47 @@
+# --- Python ---
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- FreeCAD ---
+# Automatic backups (name.YYYYMMDD-HHMMSS.FCBak) and the older .FCStd1 style
+*.FCBak
+*.FCStd1
+*.fcstd1
+# Lock/autosave folders FreeCAD creates while a document is open
+*.FCStd.lock
+autosave/
+
+# --- Slicer / printer output ---
+*.gcode
+*.bgcode
+*.gco
+*.ufp
+
+# --- Generated outlines ---
+# photo_to_outline.py writes here; regenerate from the source photos.
+# Promote a finished outline into its own folder (like match_outline/) to keep it.
+out/
+
+# --- OS / editor clutter ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+*.tmp
+*.bak
+*~
+*.swp
+.vscode/
+.idea/
+
+# OneDrive conflict copies (e.g. "file-DESKTOP-ABC123.FCStd")
+*-DESKTOP-*.*
+*-LAPTOP-*.*

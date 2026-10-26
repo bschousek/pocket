@@ -1,0 +1,6 @@
+opencv-python>=4.7
+numpy
+scipy
+shapely
+ezdxf
+pillow

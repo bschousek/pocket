@@ -1,0 +1,9 @@
+* text=auto
+*.py   text eol=lf
+*.md   text eol=lf
+*.FCStd binary
+*.3mf  binary
+*.stl  binary
+*.pdf  binary
+*.jpg  binary
+*.png  binary

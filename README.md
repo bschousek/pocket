@@ -38,6 +38,9 @@ pip install -r requirements.txt
 | `scripts/make_aruco_marker.py` | printable marker sheet (PDF) |
 | `scripts/make_aruco_stl.py` | 3D-printable marker, single STL for a filament-change print |
 | `scripts/make_aruco_3mf.py` | 3D-printable marker, two-material 3MF |
+| `scripts/strip_metadata.py` | losslessly removes EXIF/GPS/XMP metadata from JPEGs, in place |
+| `scripts/gps_check.py` | reports images that contain GPS location data |
+| `.githooks/pre-commit` | blocks commits of images with GPS data (see below) |
 | `marker/` | the 60 mm `DICT_4X4_50` id 7 marker, ready to print |
 | `match_outline/` | finished outline from the worked example (DXF, SVG, preview) |
 | `*.FCStd` | FreeCAD models (`mpocket.FCStd` is the pocket assembly) |
@@ -45,6 +48,20 @@ pip install -r requirements.txt
 | `20261025_*.jpg` | source photos |
 
 Generated output in `out/`, the virtual environment and FreeCAD backup files (`*.FCBak`) are not tracked.
+
+## Photo privacy
+
+Phone photos usually embed the GPS location where they were taken. Strip it before committing:
+
+```
+python scripts/strip_metadata.py my_photo.jpg
+```
+
+A pre-commit hook refuses to commit JPEG or PNG files that still contain location data. Git does not enable repository hooks automatically, so turn it on once per clone:
+
+```
+git config core.hooksPath .githooks
+```
 
 ## Requirements
 

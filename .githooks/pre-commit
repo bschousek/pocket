@@ -1,0 +1,9 @@
+#!/bin/sh
+# Block commits of images that contain GPS location data. Enable with:
+#   git config core.hooksPath .githooks
+for py in python python3 py; do
+  if "$py" -c "import sys; sys.exit(sys.version_info < (3, 6))" >/dev/null 2>&1; then
+    exec "$py" scripts/gps_check.py --staged
+  fi
+done
+echo "pre-commit: Python not found, skipping GPS check" >&2

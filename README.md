@@ -8,6 +8,19 @@ Cheap hard cases come full of generic foam. This project replaces the foam with 
 Photo  →  Python script  →  DXF outline  →  FreeCAD  →  Slicer  →  Print
 ```
 
+<table>
+  <tr>
+    <td align="center"><img src="docs/img/step1_photo.jpg" height="180" alt="Antenna analyzer photographed next to an ArUco marker"></td>
+    <td align="center"><img src="docs/img/step3_outline.png" height="180" alt="Traced true-scale outline of the analyzer"></td>
+    <td align="center"><img src="docs/img/step4_freecad.png" height="180" alt="FreeCAD plate with the analyzer pocket cut out"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>1. Photo with marker</sub></td>
+    <td align="center"><sub>3. DXF outline</sub></td>
+    <td align="center"><sub>4. Pocket in FreeCAD</sub></td>
+  </tr>
+</table>
+
 1. **Photo:** lay the object next to a printed ArUco marker and take one picture from above.
 2. **Python script:** the marker gives true scale and corrects a tilted camera. The script traces the object's outline.
 3. **DXF outline:** you get an exact outline plus one with 0.4 mm clearance, ready for any CAD program.
@@ -51,6 +64,7 @@ pip install -r requirements.txt
 | Path | Contents |
 |---|---|
 | `photo_to_printed_insert.pdf` | illustrated overview of the process and the worked example |
+| `docs/img/` | README thumbnails |
 | `photo-to-freecad-nest.md` | the full guide: photography, calibration, script flags, FreeCAD steps, known limits |
 | `scripts/photo_to_outline.py` | photo → scaled, straightened, simplified DXF + SVG (run with `-h` for all flags) |
 | `scripts/make_aruco_marker.py` | printable marker sheet (PDF) |

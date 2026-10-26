@@ -61,7 +61,9 @@ pip install -r requirements.txt
 | `.githooks/pre-commit` | blocks commits of images with GPS data (see below) |
 | `marker/` | the 60 mm `DICT_4X4_50` id 7 marker, ready to print |
 | `match_outline/` | finished outline from the worked example (DXF, SVG, preview) |
-| `*.FCStd` | FreeCAD models (`mpocket.FCStd` is the pocket assembly) |
+| `match.FCStd` | plate shaped to match the case's original foam piece |
+| `mills_insert.FCStd` | insert for the Mills Fleet Farm pistol case |
+| `mpocket.FCStd` | the pocket assembly: the analyzer outline cut out of the plate |
 | `mpocket-AssemblyCut.3mf` | sliceable export of the pocket |
 | `20261025_*.jpg` | source photos |
 

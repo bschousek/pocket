@@ -48,6 +48,47 @@ The full step-by-step guide is in [`photo-to-freecad-nest.md`](photo-to-freecad-
 4. **Check it.** Look at the overlay, compare the reported size with calipers, and print a one-layer test of the clearance outline.
 5. **Model it.** Import the clearance DXF into FreeCAD, convert it to a sketch, and pocket it out of a block in Part Design.
 
+### Command-line options
+
+```
+python scripts/photo_to_outline.py PHOTO [options]
+```
+
+Every option overrides a default in the script's `SETTINGS` block, so you can also change the defaults there. For a dark object on a light background, `--aruco-size` is usually the only option you need. Pixel boxes (`x0,y0,x1,y1`) are in the original, full-resolution photo.
+
+| Option | Default | What it does |
+|---|---|---|
+| `PHOTO` | `photo.jpg` | input photo |
+| **Output** | | |
+| `--name NAME` | photo file name | prefix for the output files |
+| `--out DIR` | `./out/` | output folder |
+| `--clearance MM` | `0.4` | gap added per side for the clearance outline (0.3 to 0.5 mm suits FDM printing) |
+| `--simplify MM` | `0.4` | point-reduction tolerance; larger values give smoother, simpler outlines |
+| **Scale reference** | | |
+| `--ref REF` | `aruco` | `aruco`, `half_banana`, `credit_card`, `dollar_bill`, `ruler`, or any rectangle as `LONGxSHORT` in mm, e.g. `100x40` |
+| `--aruco-size MM` | `60.0` | measured side of the marker's outer black square. Always set it to what your calipers say |
+| `--aruco-id N` | largest found | which marker to use when the photo has several |
+| `--no-rectify` | off | don't straighten perspective using the marker |
+| `--ref-box x0,y0,x1,y1` | none | box around a rectangle reference (needed for any `--ref` other than `aruco`) |
+| `--ref-lighter` | off | the rectangle reference is lighter than the background |
+| **Finding the object** | | |
+| `--keep-box x0,y0,x1,y1` | whole photo | only look for the object inside this box. Use it if something else dark is in frame |
+| `--dark-thresh N` | automatic (Otsu) | gray level (0 to 255) below which a pixel counts as object |
+| `--light-box x0,y0,x1,y1` | none | box around light or shiny parts (such as a metal connector) that the dark threshold misses |
+| `--paper-patch x0,y0,x1,y1` | automatic | patch of clean background, used with `--light-box` |
+| `--flatten-top` | off | replace a narrow protrusion at the top (such as a connector) with a plain rectangle |
+
+The `ruler` reference has no command-line options: set its tick positions (`TICK_*`) in the script. See Appendix B of the [guide](photo-to-freecad-nest.md).
+
+Example: the antenna analyzer from the worked example, with a shiny connector and a cluttered edge to avoid:
+
+```
+python scripts/photo_to_outline.py analyzer.jpg --aruco-size 60.2 --keep-box 300,0,1500,2040 \
+  --paper-patch 300,300,500,700 --light-box 800,150,1130,540 --dark-thresh 95 --flatten-top
+```
+
+(`\` continues the line on macOS and Linux. In PowerShell use a backtick, in `cmd` use `^`, or put it all on one line.)
+
 ## Setup
 
 Python 3.10+:
